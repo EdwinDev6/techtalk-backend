@@ -6,10 +6,10 @@ router.post("/", postController.createPost)
 
 router.get("/", postController.getPost)
 
-router.get("/:postTd", postController.getPostById)
+router.get("/:postId", postController.getPostById)
 
-router.put("/", postController.updatePostById)
+router.put("/:postId", postController.updatePostById)
 
-router.delete("/:", postController.deletePostById)
+router.delete("/:postId", postController.deletePostById)
 
 export default router;
