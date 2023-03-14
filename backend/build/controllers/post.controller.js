@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.updatePostById = exports.getPostById = exports.getPost = exports.deletePostById = exports.createPost = void 0;
-var _post = _interopRequireDefault(require("../models/post"));
+var _Post = _interopRequireDefault(require("../models/Post"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var createPost = function createPost(req, res) {
   console.log(req.body);

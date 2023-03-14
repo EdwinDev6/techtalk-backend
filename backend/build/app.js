@@ -7,7 +7,7 @@ exports["default"] = void 0;
 var _express = _interopRequireDefault(require("express"));
 var _morgan = _interopRequireDefault(require("morgan"));
 var _package = _interopRequireDefault(require("../package.json"));
-var _postRoutes = _interopRequireDefault(require("./routes/post.routes.js"));
+var _post = _interopRequireDefault(require("./routes/post.routes"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 var app = (0, _express["default"])();
 app.set("pkg", _package["default"]);
@@ -20,6 +20,6 @@ app.get('/', function (req, res) {
     version: app.get('pkg').version
   });
 });
-app.use('/posts', _postRoutes["default"]);
+app.use('/posts', _post["default"]);
 var _default = app;
 exports["default"] = _default;
