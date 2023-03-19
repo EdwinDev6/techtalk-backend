@@ -1,15 +1,18 @@
+
 import { Router } from "express";
-const router = Router()
-import * as postController from "../controllers/post.controller";
+const postCtrl = require('../controllers/post.controller')
+const Token = require('../middlewares/authJwt')
 
-router.post("/", postController.createPost)
+const router = Router();
 
-router.get("/", postController.getPost)
+router.post("/",Token.verifyToken,Token.isModerator,Token.isAdmin, postCtrl.createPost);
 
-router.get("/:postId", postController.getPostById)
+router.get("/", postCtrl.getPost);
 
-router.put("/:postId", postController.updatePostById)
+router.get("/:postId", postCtrl.getPostById);
 
-router.delete("/:postId", postController.deletePostById)
+router.put("/:postId",Token.verifyToken,Token.isModerator,  postCtrl.updatePostById);
+
+router.delete("/:postId",Token.verifyToken,Token.isAdmin,  postCtrl.deletePostById);
 
 export default router;

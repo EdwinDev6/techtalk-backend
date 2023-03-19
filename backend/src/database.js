@@ -1,13 +1,17 @@
 import mongoose from "mongoose";
+import { MONGODB_URI } from "./config.js";
 
-(async () => {
+
+mongoose.set('strictQuery', false);
+export const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://127.0.0.1/techtalkdb', {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     });
-    console.log('DB is connected');
+    console.log('DB is conected');
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
+    process.exit(1);
   }
-})();
+};

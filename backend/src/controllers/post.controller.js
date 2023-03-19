@@ -1,23 +1,53 @@
-import Post from "../models/Post"
+import Post from "../models/Post.js";
 
-export const createPost = (req,res) => {
-  console.log(req.body)
+  const createPost = async (req, res) => {
+  const { title, content, author, imgURL } = req.body;
+
+  try {
+    const newPost = new Post({
+      title,
+      content,
+      author,
+      imgURL,
+    });
+
+    const postSaved = await newPost.save();
+
+    res.status(201).json(postSaved);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+};
+
+const getPost = async (req, res) => {
+  const posts = await Post.find();
+  res.json(posts);
+};
+
+const getPostById = async (req, res) => {
+  const post = await Post.findById(req.params.postId);
+  res.status(200).json(post);
+};
+
+const updatePostById = async (req, res) => {
+  const updatePost = await Post.findByIdAndUpdate(req.params.postId, req.body, {
+    new: true,
+  });
+  res.status(200).json(updatePost);
+};
+
+const deletePostById = async (req, res) => {
+  const {postId}=req.params;
   
-  res.json("create post")
-}
+  await Post.findByIdAndDelete(postId);
 
-export const getPost = (req,res) => {
-  res.json("get post")
-}
+  res.status(204).json();
+};
 
-export const getPostById = (req,res) => {
-  res.json("get post by is")
-}
-
-export const updatePostById = (req,res) => {
-  res.json("update post by id")
-}
-
-export const deletePostById = (req,res) => {
-  res.json("delete post by id")
-}
+module.exports = { createPost,
+createPost,
+getPost,
+getPostById,
+updatePostById,
+deletePostById}; 

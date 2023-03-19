@@ -1,5 +1,7 @@
-import app from './app'
-import './database'
+import app from "./app.js";
+import "./database.js";
+import { PORT } from "./config.js";
+import "./libs/initialSetup.js";
 
-console.log('server on port ', 3000)
-app.listen(3000);
+app.listen(PORT);
+console.log("Server on port", 3000);

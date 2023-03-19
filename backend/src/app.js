@@ -1,22 +1,31 @@
-import express from 'express'
-import morgan from 'morgan'
-import pkg from "../package.json"
-import postsRoutes from './routes/post.routes';
-
+// Routes
+import indexRoutes from "./routes/index.routes.js";
+import postRoutes from "./routes/post.routes.js";
+import usersRoutes from "./routes/user.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+const express = require('express');
+const cors = require('cors');
 const app = express();
+const helmet = require('helmet');
+const morgan = require('morgan')
 
-app.set("pkg",pkg)
-app.use(express.json())
-app.use(morgan('dev'))
+// Settings
+app.set("port", process.env.PORT);
+app.set("json spaces", 4);
 
-app.get('/', (req,res)=>{
-    res.json({
-        author:app.get('pkg').author,
-        description:"",
-        version:app.get('pkg').version
-    })
-})
-
-app.use('/posts',postsRoutes)
+// Middlewares
+app.use(
+  cors({
+    origin: "http://localhost:3000"
+  })
+);
+app.use(helmet());
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/api", indexRoutes);
+app.use('/api/auth', authRoutes);
+app.use("/api/users", usersRoutes);
+app.use('/api/posts',postRoutes);
 
 export default app;
