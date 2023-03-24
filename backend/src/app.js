@@ -10,7 +10,7 @@ const helmet = require('helmet');
 const morgan = require('morgan')
 
 // Settings
-app.set("port", process.env.PORT);
+app.set("port", 3000);
 app.set("json spaces", 4);
 
 // Middlewares

@@ -3,5 +3,5 @@ import "./database.js";
 import { PORT } from "./config.js";
 import "./libs/initialSetup.js";
 
-app.listen(PORT);
+app.listen(3000);
 console.log("Server on port", 3000);
