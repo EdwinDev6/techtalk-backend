@@ -3,7 +3,7 @@ import indexRoutes from "./routes/index.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import usersRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
-const upload = require('./routes/upload.routes')
+// const upload = require('./routes/upload.routes')
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -22,7 +22,7 @@ app.use(
     origin: "http://localhost:3000"
   })
 );
-app.use("/file", upload);
+// app.use("/file", upload);
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
