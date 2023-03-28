@@ -5,7 +5,7 @@ const router = Router()
 
 router.get("/", (req, res) => {
   res.json({
-    message: "Welcome to my Post API",
+    message: "Welcome to my techtalk Post API",
     name: pkg.name,
     version: pkg.version,
     description: pkg.description,
