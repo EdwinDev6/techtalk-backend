@@ -1,17 +1,18 @@
 import { Router } from 'express';
-import postCtrl from '../controllers/post.controller.js';
+import {getPost, getPosts ,createPost, updatePost, removePost} from '../controllers/post.controller.js';
 import { verifyToken, isModerator, isAdmin } from '../middlewares/authJwt.js';
 
 const router = Router();
 
-router.post('/', verifyToken, isModerator, isAdmin, postCtrl.createPost);
 
-router.get('/', postCtrl.getPost);
+router.post('/',  createPost);
 
-router.get('/:postId', postCtrl.getPostById);
+router.get('/', getPosts);
 
-router.put('/:postId', verifyToken, isModerator, postCtrl.updatePostById);
+router.get('/:postId', getPost);
 
-router.delete('/:postId', verifyToken, isAdmin, postCtrl.deletePostById);
+router.put('/:postId', verifyToken, isModerator, updatePost);
+
+router.delete('/:postId', verifyToken, isAdmin, removePost);
 
 export default router;
