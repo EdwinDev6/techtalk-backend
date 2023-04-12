@@ -1,11 +1,12 @@
 import {v2 as cloudinary } from 'cloudinary'
 import { config } from "dotenv";
+import { API_KEY, API_SECRET, CLOUD_NAME } from '../config';
 config({ path: "../src/.env" });
 
 cloudinary.config({
-    cloud_name: "dipcznkms",
-    api_key: "765824697492641",
-    api_secret: "zjm-wCIqMszTmIVjPDTLQP4LkaE"
+    cloud_name: CLOUD_NAME,
+    api_key: API_KEY,
+    api_secret: API_SECRET
   });
 
 export const uploadImage = async filePath =>{
