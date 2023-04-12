@@ -9,3 +9,7 @@ export const SECRET = "a-ochoa-lo-mataron-a-balasos";
 export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@localhost";
 export const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
 export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin";
+
+export const CLOUD_NAME= process.env.CLOUD_NAME;
+export const API_KEY=process.env.API_KEY;
+export const API_SECRET= process.env.API_SECRET;

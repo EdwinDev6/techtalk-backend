@@ -19,7 +19,7 @@ app.use(cors({
 
 app.use(fileUpload({
   useTempFiles : true,
-  tempFileDir : '../uploads'
+  tempFileDir : './uploads'
 }));
 app.use(helmet());
 app.use(morgan('dev'));
