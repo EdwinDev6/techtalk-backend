@@ -10,7 +10,7 @@ import authRoutes from './routes/auth.routes.js';
 import fileUpload from 'express-fileupload';
 const app = express();
 
-app.set('port', 3000);
+app.set('port', 4000);
 app.set('json spaces', 4);
 
 app.use(cors({

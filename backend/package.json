@@ -26,7 +26,7 @@
   "scripts": {
     "build": "babel src --out-dir build",
     "start": "node build/index.js",
-    "dev": "nodemon src/index.js --exec babel-node"
+    "dev": "nodemon src/index.js --exec babel-node --ignore frontend"
   },
   "keywords": [],
   "author": "Edwin Mendoza",
