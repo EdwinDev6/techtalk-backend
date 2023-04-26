@@ -2,7 +2,7 @@ import { config } from "dotenv";
 config({ path: "../src/.env" });
 
 export const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1/techtalkdb";
+  process.env.MONGODB_URI || "mongodb+srv://edwinmendoza0620:Jdss2901jd@cluster0.apvuvjc.mongodb.net/techtalkdb?retryWrites=true&w=majority";
 export const PORT = process.env.PORT;
 export const SECRET = "a-ochoa-lo-mataron-a-balasos";
 
