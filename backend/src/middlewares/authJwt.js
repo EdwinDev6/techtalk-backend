@@ -3,12 +3,18 @@ import { SECRET } from "../config.js";
 import User from "../models/User.js";
 import Role from "../models/Role.js";
 
+const getTokenFrom = req => {
+  const authorization = req.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    return authorization.substring(7)
+  }
+  return null
+}
+
+
 const verifyToken = async (req, res, next) => {
-  let token = req.headers["x-access-token"];
-
-  if (!token) return res.status(403).json({ message: "No token provided" });
-
   try {
+    const token = getTokenFrom(req)
     const decoded = jwt.verify(token, SECRET);
     req.userId = decoded.id;
 

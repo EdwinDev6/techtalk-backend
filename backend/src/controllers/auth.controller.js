@@ -26,12 +26,13 @@ export const signupHandler = async (req, res) => {
     // guardando en mongo
     const savedUser = await newUser.save();
 
-    // Creando el token
+    // Creando el token por 24 hora
     const token = jwt.sign({ id: savedUser._id }, SECRET, {
-      expiresIn: 86400, // 24 hours
+      expiresIn: 86400, 
     });
 
-    return res.status(200).json({ token });
+    return res.status(200).json({ savedUser,roles,
+      token });
   } catch (error) {
     return res.status(500).json(error.message);
   }
@@ -61,7 +62,7 @@ export const signinHandler = async (req, res) => {
       expiresIn: 86400, // 24 hours
     });
 
-    res.json({ token });
+    res.json({ userFound,token });
   } catch (error) {
     console.log(error);
   }

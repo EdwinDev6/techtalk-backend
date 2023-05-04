@@ -11,6 +11,15 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostsLimit = async (req, res) => {
+  try {
+    const posts = await Post.find().sort({ $natural: -1 }).limit(25);
+    return res.json(posts);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
 export const createPost = async (req, res) => {
   try {
     const { title, description } = req.body;
