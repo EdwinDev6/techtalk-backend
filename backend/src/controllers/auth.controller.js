@@ -57,7 +57,7 @@ export const signinHandler = async (req, res) => {
         message: "Invalid Password",
       });
 
-    const token = jwt.sign({ id: userFound._id }, SECRET, {
+    const token = jwt.sign({ id: userFound._id}, SECRET, {
       expiresIn: 86400, // 24 hours
     });
 

@@ -5,13 +5,13 @@ import { verifyToken, isModerator, isAdmin } from '../middlewares/authJwt.js';
 const router = Router();
 
 
-router.post('/',  createPost);
+router.post('/',verifyToken, isAdmin,  createPost);
 
 router.get('/', getPosts);
 
 router.get('/:postId', getPost);
 
-router.put('/:postId',  updatePost);
+router.put('/:postId', isModerator, updatePost);
 
 router.delete('/:postId',  removePost);
 
