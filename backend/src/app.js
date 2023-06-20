@@ -7,6 +7,7 @@ import indexRoutes from './routes/index.routes.js';
 import postRoutes from './routes/post.routes.js';
 import usersRoutes from './routes/user.routes.js';
 import authRoutes from './routes/auth.routes.js';
+import adminRoutes from './routes/admin.routes.js'
 import fileUpload from 'express-fileupload';
 const app = express();
 
@@ -29,5 +30,6 @@ app.use('/api', indexRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/posts', postRoutes);
+app.use('api/admin', adminRoutes)
 
 export default app;
