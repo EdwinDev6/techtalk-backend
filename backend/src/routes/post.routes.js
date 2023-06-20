@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {getPost, getPosts ,createPost, updatePost, removePost} from '../controllers/post.controller.js';
-import { verifyToken, isModerator, isAdmin } from '../middlewares/authJwt.js';
+import { verifyToken, isAdmin } from '../middlewares/authJwt.js';
 
 const router = Router();
 
@@ -11,8 +11,8 @@ router.get('/', getPosts);
 
 router.get('/:postId', getPost);
 
-router.put('/:postId', isModerator, updatePost);
+router.put('/:postId', isAdmin, updatePost);
 
-router.delete('/:postId',  removePost);
+router.delete('/:postId', isAdmin, removePost);
 
 export default router;
