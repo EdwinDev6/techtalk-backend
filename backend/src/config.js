@@ -1,16 +1,18 @@
 import { config } from "dotenv";
-config({ path: "../src/.env" });
+import { resolve } from "path"
+config({ path: resolve(__dirname, "..", ".env") });
 
 export const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb+srv://edwinmendoza0620:Jdss2901jd@cluster0.apvuvjc.mongodb.net/techtalkdb?retryWrites=true&w=majority";
+  process.env.MONGODB_URI 
 export const PORT = process.env.PORT;
-export const SECRET = "a-ochoa-lo-mataron-a-balasos";
+export const SECRET = process.env.SECRET;
 
-export const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@localhost";
-export const ADMIN_USERNAME = process.env.ADMIN_USERNAME || "admin";
-export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin";
+export const ADMIN_EMAIL = process.env.ADMIN_EMAIL ;
+export const ADMIN_USERNAME = process.env.ADMIN_USERNAME ;
+export const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ;
 
-export const CLOUD_NAME= process.env.CLOUD_NAME || "dipcznkms";
-export const API_KEY=process.env.API_KEY || "765824697492641";
-export const API_SECRET= process.env.API_SECRET || "zjm-wCIqMszTmIVjPDTLQP4LkaE";
+export const CLOUD_NAME= process.env.CLOUD_NAME ;
+export const API_KEY=process.env.API_KEY ;
+export const API_SECRET= process.env.API_SECRET ;
+
 
