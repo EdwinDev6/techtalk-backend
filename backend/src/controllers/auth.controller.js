@@ -61,7 +61,7 @@ export const signinHandler = async (req, res) => {
       expiresIn: 86400, // 24 hours
     });
     const roles = userFound.roles;
-    res.json({ token, roles   });
+    res.json({ token, roles  });
 
   } catch (error) {
     console.log(error);

@@ -11,8 +11,8 @@ router.get('/', getPosts);
 
 router.get('/:postId', getPost);
 
-router.put('/:postId', isAdmin, updatePost);
+router.put('/:postId',verifyToken, isAdmin, updatePost);
 
-router.delete('/:postId', isAdmin, removePost);
+router.delete('/:postId',verifyToken, isAdmin, removePost);
 
 export default router;
