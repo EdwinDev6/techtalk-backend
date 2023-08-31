@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-
+import cookieParser from "cookie-parser"
 import indexRoutes from "./routes/index.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import usersRoutes from "./routes/user.routes.js";
@@ -35,5 +35,5 @@ app.use("/api", indexRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/posts", postRoutes);
-
+app.use(cookieParser())
 export default app;
