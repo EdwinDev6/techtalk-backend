@@ -64,6 +64,6 @@ export const signinHandler = async (req, res) => {
     res.json({ token, roles  });
 
   } catch (error) {
-    console.log(error);
+    
   }
 };
