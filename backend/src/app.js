@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-
+import cookieParser from "cookie-parser";
 import indexRoutes from "./routes/index.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import usersRoutes from "./routes/user.routes.js";
@@ -16,6 +16,7 @@ app.set("json spaces", 4);
 app.use(
   cors({
     origin: "http://localhost:3000",
+    credentials: true,
   })
 );
 
@@ -26,7 +27,7 @@ app.use(
     resource_type: "auto",
   })
 );
-
+app.use(cookieParser());
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());

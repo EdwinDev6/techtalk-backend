@@ -57,12 +57,15 @@ export const signinHandler = async (req, res) => {
         message: "Invalid Password",
       });
 
-    const token = jwt.sign({ id: userFound._id}, SECRET, {
+    const token = jwt.sign({ id: userFound._id }, SECRET, {
       expiresIn: 86400, // 24 hours
     });
+   
     const roles = userFound.roles;
-    res.json({ token, roles  });
 
+    res.cookie("token", token)
+    res.cookie("roles", roles)
+    res.json({ token, roles });
   } catch (error) {
     console.log(error);
   }
