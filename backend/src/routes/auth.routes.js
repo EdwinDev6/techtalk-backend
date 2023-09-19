@@ -27,21 +27,21 @@ router.get('/signin', async (req, res) => {
   const {userId}= req.body;
 
   try {
-    // Buscar el usuario por ID utilizando Mongoose
+    // Search user by ID using Mongoose
     const user = await User.findById(userId);
 
     if (user) {
       return res.json({ error: user });
     }
 
-    // Enviar la respuesta con los datos del usuario
+    // Send the response with the user's data
     res.json({
       id: user,
       name: user.username,
       role: user.roles
     });
   } catch (error) {
-    // Manejar cualquier error ocurrido durante la consulta a la base de datos
+    
     
   }
 });

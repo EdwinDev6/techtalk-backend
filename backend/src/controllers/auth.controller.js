@@ -14,7 +14,7 @@ export const signupHandler = async (req, res) => {
       password,
     });
 
-    // verificando roles
+    // verifying roles
     if (roles) {
       const foundRoles = await Role.find({ name: { $in: roles } });
       newUser.roles = foundRoles.map((role) => role._id);
@@ -23,10 +23,10 @@ export const signupHandler = async (req, res) => {
       newUser.roles = [role._id];
     }
 
-    // guardando en mongo
+    // saving in mongo
     const savedUser = await newUser.save();
 
-    // Creando el token
+    // Creating the token
     const token = jwt.sign({ id: savedUser._id }, SECRET, {
       expiresIn: 86400, // 24 hours
     });
