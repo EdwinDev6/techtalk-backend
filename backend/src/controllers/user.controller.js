@@ -28,7 +28,7 @@ export const createUser = async (req, res) => {
       roles: savedUser.roles,
     });
   } catch (error) {
-    console.error(error);
+    
   }
 };
 

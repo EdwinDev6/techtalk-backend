@@ -42,7 +42,7 @@ router.get('/signin', async (req, res) => {
     });
   } catch (error) {
     // Manejar cualquier error ocurrido durante la consulta a la base de datos
-    console.log(error)
+    
   }
 });
 

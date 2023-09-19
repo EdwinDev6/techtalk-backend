@@ -19,16 +19,16 @@ export const createRoles = async () => {
       new Role({ name: "admin" }).save(),
     ]);
 
-    console.log(values);
+    
   } catch (error) {
-    console.error(error);
+    
   }
 };
 
 export const createAdmin = async () => {
   // check for an existing admin user
   const userFound = await User.findOne({ email: ADMIN_EMAIL });
-  console.log(userFound);
+  
   if (userFound) return;
 
   // get roles _id
@@ -42,7 +42,7 @@ export const createAdmin = async () => {
     roles: roles.map((role) => role._id),
   });
 
-  console.log(`new user created: ${newUser.email}`);
+
 };
 
 const initApp = async () => {
