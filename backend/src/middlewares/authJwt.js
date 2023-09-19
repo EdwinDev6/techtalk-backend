@@ -15,7 +15,7 @@ const verifyToken = async (req, res, next) => {
     const user = await User.findById(req.userId, { password: 0 });
     if (!user) return res.status(404).json({ message: "No user found" });
 
-    console.log(user.roles);
+    
 
     next();
   } catch (error) {
