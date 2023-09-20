@@ -38,5 +38,5 @@ app.use("/api", indexRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/posts", postRoutes);
-app.use(cookieParser())
+app.use(cookieParser());
 export default app;
