@@ -1,6 +1,7 @@
 import Post from "../models/Post.js";
 import { uploadImage, deleteImage } from "../libs/cloudinary.js";
 import fs from "fs-extra";
+import Comment from "../models/Comments.js";
 
 export const getPosts = async (req, res) => {
   try {
@@ -91,4 +92,28 @@ export const removePost = async (req, res) => {
 
   await Post.findByIdAndDelete(postId);
   res.status(204).json();
+};
+
+export const createComment = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const { text } = req.body;
+    const author = req.cookies.username;
+
+    const comment = new Comment({ text, author });
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not Found" });
+    }
+
+    post.comments.push(comment);
+
+    await Promise.all([post.save(), comment.save()]);
+
+    return res.status(201).json(comment);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };

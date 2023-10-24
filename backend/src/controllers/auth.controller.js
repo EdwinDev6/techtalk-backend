@@ -56,15 +56,17 @@ export const signinHandler = async (req, res) => {
         token: null,
         message: "Invalid Password",
       });
-
+      
     const token = jwt.sign({ id: userFound._id }, SECRET, {
       expiresIn: 86400, // 24 hours
     });
    
     const roles = userFound.roles;
+    const username = userFound.username;
 
     res.cookie("token", token)
     res.cookie("roles", roles)
+    res.cookie("username",username)
     res.json({ token, roles });
   } catch (error) {
     

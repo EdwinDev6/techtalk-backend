@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const postSchema = new mongoose.Schema(
   {
     title: {
@@ -30,6 +29,12 @@ const postSchema = new mongoose.Schema(
       public_id: String,
       url: String,
     },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   {
     timestamps: true,
