@@ -105,7 +105,7 @@ export const createComment = async (req, res) => {
     const post = await Post.findById(postId);
 
     if (!post) {
-      return res.status(404).json({ error: "Publicación no encontrada" });
+      return res.status(404).json({ error: "Post not Found" });
     }
 
     post.comments.push(comment);
