@@ -117,3 +117,72 @@ export const createComment = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+export const updateComment = async (req, res) => {
+  const { commentId } = req.params;
+  const { text } = req.body;
+
+  try {
+    const comment = await Comment.findById(commentId);
+    if (!comment) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    if (comment.author !== req.cookies.username) {
+      return res
+        .status(403)
+        .json({ error: "You are not authorized to edit this comment" });
+    }
+
+    comment.text = text;
+    await comment.save();
+
+    return res.status(200).json(comment);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const removeComment = async (req, res) => {
+  const { commentId } = req.params;
+
+  try {
+    const comment = await Comment.findById(commentId);
+    if (!comment) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+    if (comment.author !== req.cookies.username) {
+      return res.status(403).json({
+        error: "You are not authorized to delete this comment",
+      });
+    }
+
+    const post = await Post.findOneAndUpdate(
+      { comments: commentId },
+      { $pull: { comments: commentId } },
+      { new: true }
+    );
+
+    await Comment.findByIdAndDelete(commentId);
+
+    return res.status(204).json();
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const getComments = async (req, res) => {
+  try {
+    const postId = req.params.postId;
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+    const comments = await Comment.find({ _id: { $in: post.comments } });
+
+    return res.json(comments);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
