@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema(
       trim: true,
     },
     categories: {
-      type: String,
+      type: [String],
       required: true,
     },
     source: {
