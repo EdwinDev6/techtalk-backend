@@ -17,7 +17,6 @@ const postSchema = new mongoose.Schema(
     },
     source: {
       type: String,
-      required: true,
       trim: true,
     },
     author: {
