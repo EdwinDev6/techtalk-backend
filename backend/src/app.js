@@ -13,11 +13,12 @@ const app = express();
 app.set("port", 4000);
 app.set("json spaces", 4);
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-  })
-);
+// COmment for testing in postman
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//   })
+// );
 
 app.use(
   fileUpload({

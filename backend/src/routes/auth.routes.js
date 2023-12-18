@@ -1,5 +1,7 @@
 import { Router } from "express";
 import {
+  forgotPasswordHandler,
+  resetPasswordHandler,
   signinHandler,
   signupHandler,
 } from "../controllers/auth.controller.js";
@@ -22,6 +24,8 @@ router.use((req, res, next) => {
 router.post("/signup", [checkExistingUser, checkExistingRole], signupHandler);
 
 router.post("/signin", signinHandler);
+router.post("/forgot-password", forgotPasswordHandler);
+router.post("/reset-password", resetPasswordHandler);
 
 router.get('/signin', async (req, res) => {
   const {userId}= req.body;

@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import Role from "../models/Role.js";
 import { SECRET } from "../config.js";
+import { sendResetPasswordEmail } from "./mailer.controller.js";
 
 export const signupHandler = async (req, res) => {
   try {
@@ -27,9 +28,7 @@ export const signupHandler = async (req, res) => {
     const savedUser = await newUser.save();
 
     // Creando el token
-    const token = jwt.sign({ id: savedUser._id }, SECRET, {
-      expiresIn: 86400, // 24 hours
-    });
+    const token = generateToken(savedUser._id, 86400);
 
     return res.status(200).json({ token });
   } catch (error) {
@@ -57,13 +56,70 @@ export const signinHandler = async (req, res) => {
         message: "Invalid Password",
       });
 
-    const token = jwt.sign({ id: userFound._id}, SECRET, {
-      expiresIn: 86400, // 24 hours
-    });
+    const token = generateToken(userFound._id, 86400);
     const roles = userFound.roles;
-    res.json({ token, roles  });
-
+    res.json({ token, roles });
   } catch (error) {
     console.log(error);
   }
+};
+
+export const forgotPasswordHandler = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const resetToken = generateToken(user._id, "1h");
+
+    await sendResetPasswordEmail(user.email, resetToken);
+
+    res.status(200).json({
+      message: "Reset password instructions sent to your email",
+      resetToken,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const resetPasswordHandler = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+
+    const userId = decodedToken(token);
+    console.log(userId);
+
+    const user = await User.findById({ _id: userId });
+    console.log(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    user.password = newPassword;
+
+    await user.save();
+
+    res.status(200).json({ message: "Password reset successful" });
+  } catch (error) {
+    if (error.name === "JsonWebTokenError") {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const decodedToken = (token) => {
+  const data = jwt.verify(token, SECRET);
+  return data.id;
+};
+
+const generateToken = (userId, expiresIn) => {
+  const token = jwt.sign({ id: userId }, SECRET, {
+    expiresIn: expiresIn,
+  });
+  return token;
 };
