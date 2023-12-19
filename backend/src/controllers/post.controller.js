@@ -5,7 +5,7 @@ import Comment from "../models/Comments.js";
 
 export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find({});
+    const posts = await Post.find().sort({_id: -1});
     
     return res.json(posts);
   } catch (error) {
@@ -45,7 +45,7 @@ export const getPost = async (req, res) => {
     const post = await Post.findById(req.params.postId);
     if (!post) return res.sendStatus(404);
     const comments = await Comment.find({ _id: { $in: post.comments } });
-    post.comments= comments
+    post[comments]= comments
     return res.json(post);
   } catch (error) {
     return res.status(500).json({ message: error.message });
