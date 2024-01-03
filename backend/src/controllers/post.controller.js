@@ -5,13 +5,14 @@ import Comment from "../models/Comments.js";
 
 export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().sort({_id: -1});
+    const posts = await Post.find().sort({ _id: -1 }).populate('comments');
     
     return res.json(posts);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
+
 
 export const createPost = async (req, res) => {
   try {
@@ -42,16 +43,18 @@ export const createPost = async (req, res) => {
 
 export const getPost = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(req.params.postId).populate('comments');
+
     if (!post) return res.sendStatus(404);
-    const comments = await Comment.find({ _id: { $in: post.comments } });
-    post[comments]= comments
-    return res.json(post);
+
+    // Devolver solo el objeto post
+    const simplifiedPost = post.toObject({ versionKey: false });
+
+    return res.json(simplifiedPost);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
-
 export const updatePost = async (req, res) => {
   try {
     const postId = req.params.postId;
