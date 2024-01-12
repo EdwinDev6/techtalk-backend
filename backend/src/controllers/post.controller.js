@@ -155,7 +155,12 @@ export const removeComment = async (req, res) => {
       return res.status(404).json({ error: "Comment not found" });
     }
 
-    if (comment.commentator === req.cookies.username) {
+    const isCommentator = comment.commentator === req.cookies.username;
+    const isModerator = req.cookies.roles.some(role => role._id === "644888ac94e168f50383b2f1");
+
+
+
+    if (isCommentator || isModerator) {
       const post = await Post.findOneAndUpdate(
         { comments: commentId },
         { $pull: { comments: commentId } },
@@ -174,6 +179,7 @@ export const removeComment = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
 
 export const getComments = async (req, res) => {
   try {
