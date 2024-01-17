@@ -63,10 +63,11 @@ export const signinHandler = async (req, res) => {
    
     const roles = userFound.roles;
     const username = userFound.username;
-
+    const email = userFound.email;
     res.cookie("token", token)
     res.cookie("roles", roles)
     res.cookie("username",username)
+    res.cookie("email",email)
     res.json({ token, roles });
   } catch (error) {
     
