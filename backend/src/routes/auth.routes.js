@@ -1,5 +1,7 @@
 import { Router } from "express";
 import {
+  forgotPasswordHandler,
+  resetPasswordHandler,
   signinHandler,
   signupHandler,
 } from "../controllers/auth.controller.js";
@@ -22,9 +24,11 @@ router.use((req, res, next) => {
 router.post("/signup", [checkExistingUser, checkExistingRole], signupHandler);
 
 router.post("/signin", signinHandler);
+router.post("/forgot-password", forgotPasswordHandler);
+router.post("/reset-password", resetPasswordHandler);
 
-router.get('/signin', async (req, res) => {
-  const {userId}= req.body;
+router.get("/signin", async (req, res) => {
+  const { userId } = req.body;
 
   try {
     // Search user by ID using Mongoose
@@ -38,12 +42,9 @@ router.get('/signin', async (req, res) => {
     res.json({
       id: user,
       name: user.username,
-      role: user.roles
+      role: user.roles,
     });
-  } catch (error) {
-    
-    
-  }
+  } catch (error) {}
 });
 
 export default router;
