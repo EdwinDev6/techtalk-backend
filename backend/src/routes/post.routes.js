@@ -1,18 +1,35 @@
-import { Router } from 'express';
-import {getPost, getPosts ,createPost, updatePost, removePost} from '../controllers/post.controller.js';
-import { verifyToken, isAdmin } from '../middlewares/authJwt.js';
+import { Router } from "express";
+import {
+  getPost,
+  getPosts,
+  createPost,
+  updatePost,
+  removePost,
+  createComment,
+  getComments,
+  updateComment,
+  removeComment,
+} from "../controllers/post.controller.js";
+import { verifyToken, isModerator } from "../middlewares/authJwt.js";
 
 const router = Router();
 
+router.get("/", getPosts);
 
-router.post('/',verifyToken, isAdmin,  createPost);
+router.post("/", verifyToken, isModerator, createPost);
 
-router.get('/', getPosts);
+router.get("/:postId", getPost);
 
-router.get('/:postId', getPost);
+router.delete("/:postId", verifyToken, isModerator, removePost);
 
-router.put('/:postId',verifyToken, isAdmin, updatePost);
+router.post("/:postId/comments", verifyToken, createComment);
 
-router.delete('/:postId',verifyToken, isAdmin, removePost);
+router.get("/:postId/comments", verifyToken, getComments);
+
+router.put("/:commentId/comments", verifyToken, updateComment);
+
+router.delete("/:commentId/comments", verifyToken, removeComment);
+
+router.put("/:postId", verifyToken, isModerator, updatePost);
 
 export default router;

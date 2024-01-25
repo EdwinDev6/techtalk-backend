@@ -9,26 +9,26 @@ export const createRoles = async () => {
     // Count Documents
     const count = await Role.estimatedDocumentCount();
 
-    // verificando si si el rol no existe
+    // checking if the role does not exist
     if (count > 0) return;
 
-    // Creando un rol usuario si no es admin ni mod
+    // Creating a user role if it is not admin or mod
     const values = await Promise.all([
       new Role({ name: "user" }).save(),
       new Role({ name: "moderator" }).save(),
       new Role({ name: "admin" }).save(),
     ]);
 
-    console.log(values);
+    
   } catch (error) {
-    console.error(error);
+    
   }
 };
 
 export const createAdmin = async () => {
   // check for an existing admin user
   const userFound = await User.findOne({ email: ADMIN_EMAIL });
-  console.log(userFound);
+  
   if (userFound) return;
 
   // get roles _id
@@ -42,7 +42,7 @@ export const createAdmin = async () => {
     roles: roles.map((role) => role._id),
   });
 
-  console.log(`new user created: ${newUser.email}`);
+
 };
 
 const initApp = async () => {

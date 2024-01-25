@@ -21,6 +21,10 @@ const productSchema = new mongoose.Schema(
         ref: "Role",
       },
     ],
+    subscription: {
+      type: Boolean,
+      default: false, 
+    },
   },
   {
     timestamps: true,
