@@ -2,18 +2,16 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-
 import cookieParser from "cookie-parser";
-
 import indexRoutes from "./routes/index.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import usersRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import fileUpload from "express-fileupload";
-import { FrontendUrl } from "./config.js";
+import { FrontendUrl, PORT } from "./config.js";
 const app = express();
 
-app.set("port", 4000);
+app.set("port", PORT);
 app.set("json spaces", 4);
 
 app.use(
