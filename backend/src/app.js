@@ -8,10 +8,10 @@ import postRoutes from "./routes/post.routes.js";
 import usersRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import fileUpload from "express-fileupload";
-import { FrontendUrl, PORT } from "./config.js";
+import { FrontendUrl } from "./config.js";
 const app = express();
 
-app.set("port", PORT);
+app.set("port", 4000);
 app.set("json spaces", 4);
 
 app.use(
