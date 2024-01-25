@@ -1,3 +1,4 @@
+import { FrontendUrl } from "../config";
 const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
@@ -25,7 +26,7 @@ export const sendResetPasswordEmail = async (email, resetToken) => {
     to: email,
     subject: "Restore password",
     html: `<p>Click the following link to reset your password:</p>
-           <a href="http://localhost:3000/reset-password/${resetToken}">Restore password</a>`,
+           <a href="${FrontendUrl}/reset-password/${resetToken}">Restore password</a>`,
   };
 
   await sendEmail(emailOptions);

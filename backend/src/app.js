@@ -10,6 +10,7 @@ import postRoutes from "./routes/post.routes.js";
 import usersRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import fileUpload from "express-fileupload";
+import { FrontendUrl } from "./config.js";
 const app = express();
 
 app.set("port", 4000);
@@ -17,7 +18,7 @@ app.set("json spaces", 4);
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: FrontendUrl,
     credentials: true,
   })
 );
