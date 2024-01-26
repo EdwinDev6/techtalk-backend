@@ -1,6 +1,6 @@
-import { FrontendUrl } from "../config";
-const nodemailer = require("nodemailer");
-
+import { FrontendUrl } from "../config.js";
+import nodemailer from "nodemailer";
+//TO-DO variable de entorno
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 465,

@@ -1,5 +1,5 @@
-import { FrontendUrl } from "../config";
-import User from "../models/User";
+import { FrontendUrl } from "../config.js";
+import User from "../models/User.js";
 import nodemailer from "nodemailer";
 
 export const activateSubscription = async (req, res) => {

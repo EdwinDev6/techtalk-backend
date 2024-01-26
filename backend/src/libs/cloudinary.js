@@ -1,6 +1,6 @@
 import {v2 as cloudinary } from 'cloudinary'
 import { config } from "dotenv";
-import { API_KEY, API_SECRET, CLOUD_NAME } from '../config';
+import { API_KEY, API_SECRET, CLOUD_NAME } from '../config.js';
 config({ path: "../src/.env" });
 
 cloudinary.config({

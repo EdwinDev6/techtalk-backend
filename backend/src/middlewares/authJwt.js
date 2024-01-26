@@ -54,4 +54,4 @@ const isAdmin = async (req, res, next) => {
     return res.status(500).send({ message: error });
   }
 };
-module.exports = { verifyToken, isModerator, isAdmin };
+export { verifyToken, isModerator, isAdmin };

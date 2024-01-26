@@ -26,9 +26,10 @@
   "name": "api-techtalk",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "babel src --out-dir build",
-    "start": "babel-node src/index.js",
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js --exec babel-node --ignore frontend"
   },
   "keywords": [],
