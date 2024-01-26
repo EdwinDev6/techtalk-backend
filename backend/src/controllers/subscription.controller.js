@@ -1,6 +1,6 @@
 import { FrontendUrl } from "../config.js";
 import User from "../models/User.js";
-import nodemailer from "nodemailer";
+import {createTransport} from "nodemailer";
 
 export const activateSubscription = async (req, res) => {
   try {
@@ -77,7 +77,7 @@ export const sendUnsubscribeLink = async (req, res) => {
 
     const unsubscribeLink = `${FrontendUrl}/confirm-unsubscribe?email=${email}`;
 
-    const transporter = nodemailer.createTransport({
+    const transporter = createTransport({
       host: "smtp.gmail.com",
       port: 465,
       secure: true,

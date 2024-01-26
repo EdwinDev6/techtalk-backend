@@ -1,16 +1,16 @@
-import {Router} from 'express'
-import pkg from "../../package.json" assert {type: "json"};
+// import {Router} from 'express'
+// import pkg from "../../package.json" assert {type: "json"};
 
-const router = Router()
+// const router = Router()
 
-router.get("/", (req, res) => {
-  res.json({
-    message: "Welcome to my techtalk Post API",
-    name: pkg.name,
-    version: pkg.version,
-    description: pkg.description,
-    author: pkg.author,
-  });
-});
+// router.get("/", (req, res) => {
+//   res.json({
+//     message: "Welcome to my techtalk Post API",
+//     name: pkg.name,
+//     version: pkg.version,
+//     description: pkg.description,
+//     author: pkg.author,
+//   });
+// });
 
-export default router
+// export default router
