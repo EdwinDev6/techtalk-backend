@@ -94,9 +94,17 @@ export const updatePost = async (req, res) => {
 export const removePost = async (req, res) => {
   const { postId } = req.params;
 
-  await Post.findByIdAndDelete(postId);
-  res.status(204).json();
+  try {
+    const deletedPost = await Post.findByIdAndDelete(postId);
+    if (!deletedPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+    res.status(200).json({ message: "Post deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting post", error: error.message });
+  }
 };
+
 
 export const createComment = async (req, res) => {
   try {
