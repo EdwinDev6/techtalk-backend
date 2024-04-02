@@ -30,4 +30,4 @@ Open [http://localhost:4000/api]
 allows to use the project in development mode, using nodemon to restart the server if there are any changes in the code
 
 # Authors
-@Edwin6666
+@EdwinDev6
