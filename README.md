@@ -1,4 +1,4 @@
-# 📂 TechTalk News Backend (Mini-project for Cincinnatus Institute of Craftsmanship)
+# 📂 TechTalk News Backend
 The most relevant news of technological advances
 
 # Description
